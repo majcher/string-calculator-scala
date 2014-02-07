@@ -33,8 +33,8 @@ class StringCalculator {
 	}
 
 	private def splitUsingUserProvidedDelimiter(nonEmptyInput: String): Iterable[String] = {
-		val customDelimiter = nonEmptyInput.charAt(DelimiterLinePrefix.length)
-		val numbersString = nonEmptyInput.substring(DelimiterLinePrefix.length + 1 + "\n".length)
+		val customDelimiter = nonEmptyInput.substring(DelimiterLinePrefix.length, nonEmptyInput.indexOf('\n'))
+		val numbersString = nonEmptyInput.substring(DelimiterLinePrefix.length + customDelimiter.length + 1)
 		Splitter.on(customDelimiter).split(numbersString)
 	}
 
