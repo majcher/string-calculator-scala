@@ -16,14 +16,24 @@ class StringCalculatorTest extends FlatSpec with Matchers {
 		result should equal (1)
 	}
 
-	it should "provide sum of two comma-delimited numbers" in {
+	it should "provide sum of two comma delimited numbers" in {
 		val result = calc.add("1,2")
 		result should equal (3)
 	}
 
-	it should "provide sum of any comma-delimited numbers" in {
+	it should "provide sum of any comma delimited numbers" in {
 		val result = calc.add("1,2,3,4,5")
 		result should equal (15)
+	}
+
+	it should "handle new line delimited numbers" in {
+		val result = calc.add("1\n2")
+		result should equal (3)
+	}
+
+	it should "handle new line and comma delimited numbers" in {
+		val result = calc.add("1\n2,3")
+		result should equal (6)
 	}
 
 }
