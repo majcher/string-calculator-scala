@@ -41,4 +41,10 @@ class StringCalculatorTest extends FlatSpec with Matchers {
 		result should equal (3)
 	}
 
+	it should "throw NegativeNumbersNotSupportedException exception if negative number was passed" in {
+		intercept[StringCalculator.NegativeNumbersNotSupportedException] {
+			calc.add("-1")
+		}
+	}
+
 }
