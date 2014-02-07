@@ -14,9 +14,7 @@ class StringCalculator {
 	private val DefaultSplitPattern: String = "[,\n]"
 
 	def add(input: String): Integer = {
-		val nonEmptyInput = provideDefaultValue(input)
-		val splitInput = splitText(nonEmptyInput)
-		val numbers = convertToNumbers(splitInput)
+		val numbers = convertToNumbers(splitText(provideDefaultValue(input)))
 		throwExceptionIfContainsNegativeNumbers(numbers)
 		numbers.sum
 	}
