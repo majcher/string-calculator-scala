@@ -11,4 +11,9 @@ class StringCalculatorTest extends FlatSpec with Matchers {
 		result should equal (0)
 	}
 
+	it should "1 for '1' input" in {
+		val result = calc.add("1")
+		result should equal (1)
+	}
+
 }
