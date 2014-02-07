@@ -5,7 +5,7 @@ import scala.collection.JavaConversions._
 import pl.mmajcherski.stringcalculator.StringCalculator.NegativeNumbersNotSupportedException
 
 object StringCalculator {
-	class NegativeNumbersNotSupportedException extends RuntimeException {
+	class NegativeNumbersNotSupportedException(message: String = null) extends RuntimeException(message) {
 	}
 }
 
@@ -22,8 +22,10 @@ class StringCalculator {
 
 		val numbers = splitter.split(numbersString).toList.map(_.toInt)
 
-		if (!numbers.filter(_ < 0).isEmpty) {
-			throw new StringCalculator.NegativeNumbersNotSupportedException()
+		val negativeNumbers = numbers.filter(_ < 0)
+		if (!negativeNumbers.isEmpty) {
+			val formattedNegativeNumbers = negativeNumbers.mkString(", ")
+			throw new StringCalculator.NegativeNumbersNotSupportedException("Negatives not allowed: " + formattedNegativeNumbers)
 		}
 
 		numbers.sum

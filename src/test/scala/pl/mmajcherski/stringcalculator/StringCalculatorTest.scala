@@ -41,10 +41,43 @@ class StringCalculatorTest extends FlatSpec with Matchers {
 		result should equal (3)
 	}
 
-	it should "throw NegativeNumbersNotSupportedException exception if negative number was passed" in {
-		intercept[StringCalculator.NegativeNumbersNotSupportedException] {
+	it should "throw NegativeNumbersNotSupportedException if negative number was passed" in {
+		evaluating {
 			calc.add("-1")
-		}
+		} should produce [StringCalculator.NegativeNumbersNotSupportedException]
+	}
+
+	it should "include negative numbers in thrown NegativeNumbersNotSupportedException message" in {
+		val caught = evaluating {
+			calc.add("-1")
+		} should produce [StringCalculator.NegativeNumbersNotSupportedException]
+
+		caught.getMessage should include ("-1")
+	}
+
+	it should "include all negative numbers in thrown NegativeNumbersNotSupportedException message" in {
+		val caught = evaluating {
+			calc.add("-1,2,-3")
+		} should produce [StringCalculator.NegativeNumbersNotSupportedException]
+
+		caught.getMessage should include ("-1")
+		caught.getMessage should include ("-3")
+	}
+
+	it should "not include positive numbers in thrown NegativeNumbersNotSupportedException message" in {
+		val caught = evaluating {
+			calc.add("-1,2,-3")
+		} should produce [StringCalculator.NegativeNumbersNotSupportedException]
+
+		caught.getMessage should not include "2"
+	}
+
+	it should "have well formatted message of NegativeNumbersNotSupportedException" in {
+		val caught = evaluating {
+			calc.add("-1,2,-3")
+		} should produce [StringCalculator.NegativeNumbersNotSupportedException]
+
+		caught.getMessage should be ("Negatives not allowed: -1, -3")
 	}
 
 }
