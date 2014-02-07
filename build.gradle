@@ -19,6 +19,8 @@ repositories {
 
 dependencies {
     compile 'org.scala-lang:scala-library:2.10.2'
+    compile 'com.google.guava:guava:16.0.1'
+    compile 'com.google.code.findbugs:jsr305:2.0.2'
     testCompile 'org.scalatest:scalatest_2.10:2.0'
     testRuntime 'org.pegdown:pegdown:1.1.0'
 }
