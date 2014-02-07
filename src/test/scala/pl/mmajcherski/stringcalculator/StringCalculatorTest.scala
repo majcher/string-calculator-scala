@@ -36,4 +36,9 @@ class StringCalculatorTest extends FlatSpec with Matchers {
 		result should equal (6)
 	}
 
+	it should "support custom delimiters in format of //[delimiter]\\n[numbers...]" in {
+		val result = calc.add("//;\n1;2")
+		result should equal (3)
+	}
+
 }
